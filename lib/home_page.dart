@@ -5,6 +5,8 @@ void main() {
 }
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,7 +19,10 @@ class HomePage extends StatelessWidget {
 }
 
 class Calculator extends StatefulWidget {
+  const Calculator({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _CalculatorState createState() => _CalculatorState();
 }
 

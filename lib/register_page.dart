@@ -109,11 +109,11 @@ class _RegisterPageState extends State<RegisterPage> {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  // Simpan atau kirim data register di sini
+                 
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Registrasi berhasil!')),
                   );
-                  Navigator.pop(context); // kembali ke halaman login
+                  Navigator.pop(context);
                 },
                 child: const Text("Daftar"),
               ),

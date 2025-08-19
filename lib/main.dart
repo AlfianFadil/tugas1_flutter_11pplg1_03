@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/login_wiget.dart';
+import 'package:get/get.dart';
+import 'package:flutter_application_1/pages/calculator_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,14 +11,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-       
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
-      home: LoginPage(),
+      home: CalculatorPage(), // <- tampilan awal langsung calculator
     );
   }
 }
-

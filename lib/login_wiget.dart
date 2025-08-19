@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/register_page.dart';
+import 'package:flutter_application_1/widget/widget_button.dart';
+import 'package:flutter_application_1/widget/widget_textfild.dart';
 import 'home_page.dart'; 
 
 class LoginPage extends StatefulWidget {
@@ -36,22 +38,17 @@ class _LoginPageState extends State<LoginPage> {
                 height: 200,
               ),
             ),
-            TextField(
+           MyTextFild(
               controller: usernameController,
-              decoration: InputDecoration(
-                labelText: "Username",
-                border: OutlineInputBorder(),
-              ),
+              hint: "Username", labelText: '',
 
             ),
             SizedBox(height: 20),
-            TextField(
+            
+            MyTextFild(
               controller: passwordController,
-              decoration: InputDecoration(
-                labelText: "Password",
-                border: OutlineInputBorder(),
-              ),
-              obscureText: true,
+              hint: "Password",
+              isPassword: true, labelText: '',
             ),
 
             Container(
@@ -80,13 +77,15 @@ class _LoginPageState extends State<LoginPage> {
                       });
                     }
                   },
-                  child: Text("Login"),
+
+                  child:CustomButton(
+                    text: "Login",
+                    textColor: const Color.fromARGB(255, 223, 3, 3),
+                    onPressed: () {}),
 
                 ),
               ),
-            ),
-            SizedBox(height: 10),
-            Text(statusLogin),  
+            ),  
 
                  TextButton(
               onPressed: () {
@@ -95,11 +94,14 @@ class _LoginPageState extends State<LoginPage> {
                   MaterialPageRoute(builder: (context) => RegisterPage()),
                 );
               },
-              child: Text("Belum punya akun? Daftar di sini"),
+              child:CustomButton(
+              text: "register",
+              textColor:  const Color.fromARGB(255, 85, 19, 170),
+              onPressed: () {}),
 
               
             ),
-
+ Text(statusLogin),  
           ],
         ),
       ),
