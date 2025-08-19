@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_application_1/Main_Menu.dart';
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
@@ -8,116 +8,157 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-
+  TextEditingController txtConfirmPassword = TextEditingController();
+  TextEditingController txtUsername= TextEditingController();
+  TextEditingController txtPassword = TextEditingController();
+  String statusRegister = "Register Status";
   String? selectedGender;
   DateTime? selectedDate;
+  TextEditingController txtDate = TextEditingController();
 
-  Future<void> _pickDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate ?? DateTime(2000),
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-    );
-    if (picked != null) {
-      setState(() {
-        selectedDate = picked;
-      });
-    }
-  }
+
 
   @override
   Widget build(BuildContext context) {
+    // return const Placeholder();
     return Scaffold(
-      appBar: AppBar(title: const Text("Register")),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20.0),
+      appBar: AppBar(title: Text("Register Page"),),
+      body: Container(
+        margin: EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Buat Akun Baru", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-
-            const SizedBox(height: 20),
-            TextField(
-              controller: nameController,
-              decoration: InputDecoration(
-                labelText: "Nama",
-                border: OutlineInputBorder(),
+            Text("Welcome to the Register Page!", 
+            style: TextStyle(fontSize: 18,color: Colors.blueGrey, fontWeight: FontWeight.bold),),
+            Text("Please Register using your username and password."),
+            //image dari resources
+            SizedBox(height: 10),
+            Center(
+              child: Image.asset(
+                'assets/gambar.png',
+                width: 100,
+                height: 100,
+              ),
+            ),
+            //buatlah isian username dan password
+            
+            Container(
+              margin: EdgeInsets.only(top: 20, bottom: 10),
+              child: TextField(
+                controller: txtUsername,
+                decoration: InputDecoration(
+                  labelText: "username",
+                  hintText: "Enter your username",
+                  border: OutlineInputBorder(),
+                ),
               ),
             ),
 
-            const SizedBox(height: 16),
             TextField(
-              controller: emailController,
-              decoration: InputDecoration(
-                labelText: "Email / Username",
-                border: OutlineInputBorder(),
-              ),
-            ),
-
-            const SizedBox(height: 16),
-            TextField(
-              controller: passwordController,
-              obscureText: true,
+              
+              controller: txtPassword,
+              obscureText: true, // untuk menyembunyikan karakter password
               decoration: InputDecoration(
                 labelText: "Password",
-                border: OutlineInputBorder(),
+                hintText: "Enter your password",
+                border: OutlineInputBorder(), 
               ),
             ),
 
-            const SizedBox(height: 16),
-            DropdownButtonFormField<String>(
-              decoration: const InputDecoration(
-                labelText: "Jenis Kelamin",
-                border: OutlineInputBorder(),
-              ),
-              value: selectedGender,
-              items: ['Laki-laki', 'Perempuan']
-                  .map((gender) => DropdownMenuItem(
-                        value: gender,
-                        child: Text(gender),
-                      ))
-                  .toList(),
-              onChanged: (value) {
-                setState(() {
-                  selectedGender = value;
-                });
-              },
-            ),
+            SizedBox(height: 10),
+Text("Select Gender:", style: TextStyle(fontWeight: FontWeight.bold)),
 
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    selectedDate == null
-                        ? "Tanggal Lahir belum dipilih"
-                        : "Tanggal Lahir: ${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}",
-                  ),
-                ),
-                TextButton(
-                  onPressed: () => _pickDate(context),
-                  child: const Text("Pilih Tanggal"),
-                ),
-              ],
-            ),
+RadioListTile<String>(
+  title: const Text('Male'),
+  value: 'Male',
+  groupValue: selectedGender,
+  onChanged: (value) {
+    setState(() {
+      selectedGender = value;
+    });
+  },
+),
 
-            const SizedBox(height: 30),
+RadioListTile<String>(
+  title: const Text('Female'),
+  value: 'Female',
+  groupValue: selectedGender,
+  onChanged: (value) {
+    setState(() {
+      selectedGender = value;
+    });
+  },
+),
+
+SizedBox(height: 10),
+Text("Date of Birth:", style: TextStyle(fontWeight: FontWeight.bold)),
+TextField(
+  controller: txtDate,
+  readOnly: true,
+  decoration: InputDecoration(
+    hintText: 'Select your birth date',
+    border: OutlineInputBorder(),
+    suffixIcon: Icon(Icons.calendar_today),
+  ),
+  onTap: () async {
+    DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+
+    if (pickedDate != null) {
+      setState(() {
+        selectedDate = pickedDate;
+        txtDate.text = "${pickedDate.day}-${pickedDate.month}-${pickedDate.year}";
+      });
+    }
+  },
+),
+
+
+
+            //Regiter button
             Center(
-              child: ElevatedButton(
-                onPressed: () {
-                 
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Registrasi berhasil!')),
-                  );
-                  Navigator.pop(context);
-                },
-                child: const Text("Daftar"),
+              child: Container(
+                margin: EdgeInsets.only(top: 10),
+                child: ElevatedButton(
+                  onPressed: () {
+                    //jika username dan password adalah admin maka muncul snackbar
+                    if (txtUsername.text.isNotEmpty &&
+    txtPassword.text.isNotEmpty &&
+    selectedGender != null &&
+    selectedDate != null) {
+
+                      
+                      ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Register Successfull")),
+                      );
+                      setState(() {
+                        statusRegister = "Register Successfull";
+                        print(statusRegister);
+                      });
+                      Navigator.push(
+                        context, 
+                        MaterialPageRoute(builder: (context) => MainMenu()),
+                        );
+                    }else{
+                      ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Tolong di isi username, password, gender dan juga tanggalnya")),
+                      );
+                      setState(() {
+                        statusRegister = "Register Error";
+                        print(statusRegister);
+                      });
+                    }
+                  },
+                  child: Text("Register"),
+                ),
               ),
             ),
+            Text(statusRegister),
+            
           ],
         ),
       ),

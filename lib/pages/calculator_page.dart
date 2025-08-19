@@ -13,6 +13,7 @@ class CalculatorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text("Calculator"),),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -37,7 +38,7 @@ class CalculatorPage extends StatelessWidget {
                   textColor: const Color.fromARGB(255, 0, 0, 0),
                   onPressed: () {
                     calculatorControlers.tambah();
-                  },
+                  }, textColour: Colors.blue,
                 ),
                 const SizedBox(width: 10),
                 CustomButton(
@@ -45,7 +46,7 @@ class CalculatorPage extends StatelessWidget {
                   textColor: const Color.fromARGB(255, 0, 0, 0),
                   onPressed: () {
                     calculatorControlers.kurang();
-                  },
+                  }, textColour: Colors.blue,
                 ),
               ],
             ),
@@ -58,7 +59,7 @@ class CalculatorPage extends StatelessWidget {
                   textColor: const Color.fromARGB(255, 0, 0, 0),
                   onPressed: () {
                     calculatorControlers.kali();
-                  },
+                  }, textColour: Colors.blue,
                 ),
                 const SizedBox(width: 10),
                 CustomButton(
@@ -66,7 +67,7 @@ class CalculatorPage extends StatelessWidget {
                   textColor: const Color.fromARGB(255, 12, 12, 12),
                   onPressed: () {
                     calculatorControlers.bagi();
-                  },
+                  }, textColour: Colors.blue,
                 ),
               ],
             ),
@@ -83,7 +84,7 @@ class CalculatorPage extends StatelessWidget {
               textColor: Colors.blue,
               onPressed: () {
                 calculatorControlers.clear();
-              },
+              }, textColour: Colors.red,
             ),
           ],
         ),
