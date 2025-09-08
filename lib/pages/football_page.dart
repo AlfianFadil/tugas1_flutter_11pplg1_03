@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_application_1/routes/routes.dart';
 import 'package:flutter_application_1/controlers/football_controller.dart';
-import 'package:flutter_application_1/pages/football_edit_pages.dart';
-import 'package:flutter_application_1/widget/widget_button.dart';
 
 
 class FootballPages extends StatelessWidget {
   FootballPages({super.key});
 
-  final FootballController footballController = Get.put(FootballController());
-
+  // final FootballController footballController = Get.put(FootballController());
+    final footballController = Get.find <FootballController>();
+    
   @override
   Widget build(BuildContext context) {
     return Scaffold(

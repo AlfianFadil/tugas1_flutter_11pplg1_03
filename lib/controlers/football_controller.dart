@@ -1,6 +1,7 @@
 import 'package:flutter_application_1/models/football_model.dart';
 import 'package:get/get.dart';
 
+
 class FootballController extends GetxController {
   var players = <FootballPlayer>[
     FootballPlayer(

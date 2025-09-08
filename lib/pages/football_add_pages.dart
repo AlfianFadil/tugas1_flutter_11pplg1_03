@@ -3,6 +3,7 @@ import 'package:flutter_application_1/controlers/football_controller.dart';
 import 'package:flutter_application_1/models/football_model.dart';
 import 'package:get/get.dart';
 
+
 class FootballAddPages extends StatelessWidget {
   final int? index; // null kalau tambah baru
   final footballController = Get.find<FootballController>();

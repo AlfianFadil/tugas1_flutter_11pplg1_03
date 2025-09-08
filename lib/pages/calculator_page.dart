@@ -7,8 +7,9 @@ import 'package:get/get.dart';
 class CalculatorPage extends StatelessWidget {
   CalculatorPage({super.key});
 
-  final CalculatorControlers calculatorControlers =
-      Get.put(CalculatorControlers());
+  // final CalculatorControlers calculatorControlers = Get.put(CalculatorControlers());
+
+      final calculatorControlers = Get.find <CalculatorControlers>();
 
   @override
   Widget build(BuildContext context) {
